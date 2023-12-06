@@ -1,13 +1,18 @@
-FROM golang:1.21.0-alpine3.18 AS build
+FROM --platform=$BUILDPLATFORM golang:1.21.0-alpine3.18 AS build
 
 WORKDIR /usr/src
 
 ADD go.mod go.sum ./
 RUN go mod download && go mod verify
 
-RUN go build github.com/twitchtv/twirp/protoc-gen-twirp
-RUN go build google.golang.org/protobuf/cmd/protoc-gen-go
-RUN go build github.com/navigacontentlab/twopdocs/cmd/protoc-gen-openapi3
+ARG TARGETOS TARGETARCH
+
+RUN GOOS=$TARGETOS GOARCH=$TARGETARCH \
+    go build github.com/twitchtv/twirp/protoc-gen-twirp
+RUN GOOS=$TARGETOS GOARCH=$TARGETARCH \
+    go build google.golang.org/protobuf/cmd/protoc-gen-go
+RUN GOOS=$TARGETOS GOARCH=$TARGETARCH \
+    go build github.com/navigacontentlab/twopdocs/cmd/protoc-gen-openapi3
 
 FROM alpine:3.18.3
 

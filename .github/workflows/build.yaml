@@ -37,8 +37,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          # Specify the build_platforms variable in the GitHub repo
-          platforms: ${{ vars.BUILD_PLATFORMS }}
+          platforms: linux/amd64,linux/arm64
           build-args: |
             protoc_version=3.21.9-r0
           push: true
