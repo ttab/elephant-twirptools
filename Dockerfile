@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM golang:1.21.0-alpine3.18 AS build
+FROM --platform=$BUILDPLATFORM golang:1.21.6-alpine3.19 AS build
 
 WORKDIR /usr/src
 
@@ -14,11 +14,11 @@ RUN GOOS=$TARGETOS GOARCH=$TARGETARCH \
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH \
     go build github.com/navigacontentlab/twopdocs/cmd/protoc-gen-openapi3
 
-FROM alpine:3.18.3
+FROM alpine:3.19.0
 
 ARG protoc_version
 
-RUN apk add --no-cache jq protoc
+RUN apk add --no-cache jq protoc=$protoc_version
 
 COPY --from=build /usr/src/protoc-gen-twirp /usr/local/bin/
 COPY --from=build /usr/src/protoc-gen-go /usr/local/bin/
