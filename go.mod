@@ -8,6 +8,8 @@ require (
 	google.golang.org/protobuf v1.32.0
 )
 
+replace github.com/navigacontentlab/twopdocs v0.2.7 => github.com/ttab/twopdocs v0.0.0-20240112092440-ecb73af35b25
+
 require (
 	github.com/getkin/kin-openapi v0.122.0 // indirect
 	github.com/go-openapi/jsonpointer v0.20.0 // indirect
