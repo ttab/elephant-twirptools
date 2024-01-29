@@ -14,7 +14,7 @@ RUN GOOS=$TARGETOS GOARCH=$TARGETARCH \
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH \
     go build github.com/navigacontentlab/twopdocs/cmd/protoc-gen-openapi3
 
-FROM alpine:3.19.0
+FROM alpine:3.19.1
 
 ARG protoc_version
 
