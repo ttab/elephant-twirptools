@@ -1,11 +1,11 @@
 module github.com/ttab/elephant-twirptools
 
-go 1.21
+go 1.23.4
 
 require (
 	github.com/navigacontentlab/twopdocs v0.2.7
 	github.com/twitchtv/twirp v8.1.3+incompatible
-	google.golang.org/protobuf v1.32.0
+	google.golang.org/protobuf v1.36.2
 )
 
 replace github.com/navigacontentlab/twopdocs v0.2.7 => github.com/ttab/twopdocs v0.0.0-20240112092440-ecb73af35b25

@@ -39,7 +39,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           build-args: |
-            protoc_version=24.4-r0
+            protoc_version=24.4-r4
           push: true
           tags: ghcr.io/${{ github.repository }}:${{ github.ref_name }}
           cache-from: type=gha
