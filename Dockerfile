@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM golang:1.23.4-alpine3.21 AS build
+FROM --platform=$BUILDPLATFORM golang:1.27.1-alpine3.24 AS build
 
 WORKDIR /usr/src
 
@@ -8,20 +8,14 @@ RUN go mod download && go mod verify
 ARG TARGETOS TARGETARCH
 
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH \
-    go build github.com/twitchtv/twirp/protoc-gen-twirp
-RUN GOOS=$TARGETOS GOARCH=$TARGETARCH \
-    go build google.golang.org/protobuf/cmd/protoc-gen-go
-RUN GOOS=$TARGETOS GOARCH=$TARGETARCH \
-    go build github.com/navigacontentlab/twopdocs/cmd/protoc-gen-openapi3
+    go build -o /out/ tool
 
-FROM alpine:3.21.0
+FROM alpine:3.24.1
 
 ARG protoc_version
 
 RUN apk add --no-cache jq protoc=$protoc_version
 
-COPY --from=build /usr/src/protoc-gen-twirp /usr/local/bin/
-COPY --from=build /usr/src/protoc-gen-go /usr/local/bin/
-COPY --from=build /usr/src/protoc-gen-openapi3 /usr/local/bin/
+COPY --from=build /out/ /usr/local/bin/
 
 WORKDIR /usr/src

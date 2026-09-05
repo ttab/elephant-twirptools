@@ -15,7 +15,7 @@ module := $(shell go list -m)
 TOOL := docker run --rm \
 	-v "$(shell pwd):/usr/src" \
 	-u $(shell id -u):$(shell id -g) \
-	ghcr.io/ttab/elephant-twirptools:v8.1.3-0
+	ghcr.io/ttab/elephant-twirptools:v8.1.3-5
 
 .PHONY: proto
 proto: $(generated_files)
