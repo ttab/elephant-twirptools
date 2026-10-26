@@ -10,7 +10,7 @@ ARG TARGETOS TARGETARCH
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH \
     go build -o /out/ tool
 
-FROM alpine:3.24.1
+FROM alpine:3.24.3
 
 ARG protoc_version
 
